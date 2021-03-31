@@ -18,5 +18,13 @@ def afficherTableau():
         print item.pays, "(" + item.code + ")", "TVA :", item.tva
     print("-------------------------------")
 
+def calculerTtc():
+    montantHt = raw_input('Entrez un montant HT : ')
+    tauxTva = raw_input('Entrez un montant TVA : ')
+
+    total = int(montantHt) + float(tauxTva)
+    print(total)
+
 # Demarrage
 afficherTableau()
+calculerTtc()
