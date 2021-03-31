@@ -20,9 +20,9 @@ def afficherTableau():
 
 def calculerTtc():
     montantHt = raw_input('Entrez un montant HT : ')
-    tauxTva = raw_input('Entrez un montant TVA : ')
+    tauxTva = raw_input('Entrez un taux TVA : ')
 
-    total = int(montantHt) + float(tauxTva)
+    total = float(montantHt) + ((float(tauxTva) / 100) * float(montantHt))
     print(total)
 
 # Demarrage
