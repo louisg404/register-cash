@@ -56,7 +56,7 @@ def calculerTtc():
         ajouter = raw_input("Ajouter un autre article ? (o/n)")
 
     paysUtilisateur = raw_input('Entrez un code pays : ')
-    montantADeduireHt = raw_input('Entrez un montant de reduction : ')
+    tauxADeduireHt = raw_input('Entrez un taux de reduction : ')
 
     for item in codesPays:
         if item.code == paysUtilisateur:
@@ -74,7 +74,7 @@ def calculerTtc():
             elif totalHt >= 15000:
                 print("Reduction suggeree de 15%")
 
-            totalTTC = (totalHt - float(montantADeduireHt)) * (1 + float(item.tva) / 100)
+            totalTTC = (totalHt * (1 - float(tauxADeduireHt) / 100)) * (1 + float(item.tva) / 100)
             print "Le total TTC est de :", totalTTC
 
 # Demarrage
