@@ -24,18 +24,24 @@ def calculerTtc():
             self.quantite = quantite
             self.prix = prix
 
-    prix = raw_input('Entrez un montant HT : ')
-    quantite = raw_input('Entrez une quantite : ')
-
+    ajouter = 'o'
+    totalAll = 0
     articles = []
-    articles.append(article(quantite, prix))
+
+    while ajouter == 'o':
+        prix = raw_input('Entrez un montant HT : ')
+        quantite = raw_input('Entrez une quantite : ')
+        articles.append(article(quantite, prix))
+        ajouter = raw_input("Ajouter un autre article ? (o/n)")
 
     paysUtilisateur = raw_input('Entrez un code pays : ')
     for item in codesPays:
         if item.code == paysUtilisateur:
             for article in articles:
                 totalTTC = float(article.prix) * int(article.quantite) * (1 + float(item.tva) / 100)
-                print "Le montant TTC est de", totalTTC
+                totalAll = totalAll + totalTTC
+    
+    print(totalAll)
 
 # Demarrage
 afficherTableau()
