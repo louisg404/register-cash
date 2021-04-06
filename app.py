@@ -27,13 +27,14 @@ reductions.append(reduction(15000, 15))
 def afficherTableau():
     print("-------------------------------")
     print("Pays")
+    print("-----------")
     for item in codesPays:
         print item.pays, "(" + item.code + ")", "TVA :", item.tva
     print("-------------------------------")
 
 def afficherReductions():
-    print("-------------------------------")
     print("Reductions")
+    print("-----------")
     for item in reductions:
         print item.minimum, "(", item.taux, "%)"
     print("-------------------------------")
@@ -45,8 +46,8 @@ def calculerTtc():
             self.prix = prix
 
     ajouter = 'o'
-    totalAll = 0
     articles = []
+    totalHt = 0
 
     while ajouter == 'o':
         prix = raw_input('Entrez un montant HT : ')
@@ -55,15 +56,28 @@ def calculerTtc():
         ajouter = raw_input("Ajouter un autre article ? (o/n)")
 
     paysUtilisateur = raw_input('Entrez un code pays : ')
+    montantADeduireHt = raw_input('Entrez un montant de reduction : ')
+
     for item in codesPays:
         if item.code == paysUtilisateur:
             for article in articles:
-                totalTTC = float(article.prix) * int(article.quantite) * (1 + float(item.tva) / 100)
-                totalAll = totalAll + totalTTC
-    
-    print "Le total TTC est de :", totalAll
+                totalHt = totalHt + (float(article.prix) * int(article.quantite))
+
+            if totalHt >= 1000 and totalHt < 5000:
+                print("Reduction suggeree de 3%")
+            elif totalHt >= 5000 and totalHt < 7000:
+                print("Reduction suggeree de 5%")
+            elif totalHt >= 7000 and totalHt < 10000:
+                print("Reduction suggeree de 7%")
+            elif totalHt >= 10000 and totalHt < 15000:
+                print("Reduction suggeree de 10%")
+            elif totalHt >= 15000:
+                print("Reduction suggeree de 15%")
+
+            totalTTC = (totalHt - float(montantADeduireHt)) * (1 + float(item.tva) / 100)
+            print "Le total TTC est de :", totalTTC
 
 # Demarrage
 afficherTableau()
-calculerTtc()
 afficherReductions()
+calculerTtc()
