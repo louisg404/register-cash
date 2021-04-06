@@ -4,6 +4,11 @@ class pays(object):
         self.code = code
         self.tva = tva
 
+class reduction(object):
+    def __init__(self, minimum, taux):
+        self.minimum = minimum
+        self.taux = taux
+
 codesPays = []
 codesPays.append(pays('France', 'FR', 20))
 codesPays.append(pays('Espagne', 'ES', 21))
@@ -12,10 +17,25 @@ codesPays.append(pays('Luxembourg', 'LU', 17))
 codesPays.append(pays('Portugal', 'PT', 23))
 codesPays.append(pays('Roumanie', 'RO', 19))
 
+reductions = []
+reductions.append(reduction(1000, 3))
+reductions.append(reduction(5000, 5))
+reductions.append(reduction(7000, 7))
+reductions.append(reduction(10000, 10))
+reductions.append(reduction(15000, 15))
+
 def afficherTableau():
     print("-------------------------------")
+    print("Pays")
     for item in codesPays:
         print item.pays, "(" + item.code + ")", "TVA :", item.tva
+    print("-------------------------------")
+
+def afficherReductions():
+    print("-------------------------------")
+    print("Reductions")
+    for item in reductions:
+        print item.minimum, "(", item.taux, "%)"
     print("-------------------------------")
 
 def calculerTtc():
@@ -41,8 +61,9 @@ def calculerTtc():
                 totalTTC = float(article.prix) * int(article.quantite) * (1 + float(item.tva) / 100)
                 totalAll = totalAll + totalTTC
     
-    print(totalAll)
+    print "Le total TTC est de :", totalAll
 
 # Demarrage
 afficherTableau()
 calculerTtc()
+afficherReductions()
