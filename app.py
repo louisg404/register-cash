@@ -19,14 +19,23 @@ def afficherTableau():
     print("-------------------------------")
 
 def calculerTtc():
-    montantHt = raw_input('Entrez un montant HT : ')
+    class article(object):
+        def __init__(self, quantite, prix):
+            self.quantite = quantite
+            self.prix = prix
+
+    prix = raw_input('Entrez un montant HT : ')
+    quantite = raw_input('Entrez une quantite : ')
+
+    articles = []
+    articles.append(article(quantite, prix))
+
     paysUtilisateur = raw_input('Entrez un code pays : ')
-    
-    # Recherche Pays
     for item in codesPays:
         if item.code == paysUtilisateur:
-            totalTTC = float(montantHt) + (float(item.tva) / 100 * float(montantHt))
-            print "Le montant TTC est de", totalTTC
+            for article in articles:
+                totalTTC = float(article.prix) * int(article.quantite) * (1 + float(item.tva) / 100)
+                print "Le montant TTC est de", totalTTC
 
 # Demarrage
 afficherTableau()
