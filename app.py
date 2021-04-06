@@ -20,10 +20,13 @@ def afficherTableau():
 
 def calculerTtc():
     montantHt = raw_input('Entrez un montant HT : ')
-    tauxTva = raw_input('Entrez un taux TVA : ')
-
-    total = float(montantHt) + ((float(tauxTva) / 100) * float(montantHt))
-    print(total)
+    paysUtilisateur = raw_input('Entrez un code pays : ')
+    
+    # Recherche Pays
+    for item in codesPays:
+        if item.code == paysUtilisateur:
+            totalTTC = float(montantHt) + (float(item.tva) / 100 * float(montantHt))
+            print "Le montant TTC est de", totalTTC
 
 # Demarrage
 afficherTableau()
